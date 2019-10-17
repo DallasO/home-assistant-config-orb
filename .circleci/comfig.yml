@@ -1,1 +1,80 @@
-# This needs some stuff
+version: 2.1
+orbs:
+  orb-tools: circleci/orb-tools@8.27
+  your-orb: dallaso/home-assistant-config@dev:alpha
+workflows:
+  lint_pack-validate_publish-dev:
+    jobs:
+      - orb-tools/lint
+      - orb-tools/pack:
+          requires:
+            - orb-tools/lint
+      - orb-tools/publish-dev:
+          orb-name: dallaso/home-assistant-config
+          requires:
+            - orb-tools/pack
+      - orb-tools/trigger-integration-workflow:
+          filters:
+            branches:
+              ignore: master
+          name: trigger-integration-dev
+          requires:
+            - orb-tools/publish-dev
+          ssh-fingerprints: 8e:20:46:a7:a4:1b:30:38:50:f9:fc:97:a0:8e:0b:66
+      - orb-tools/trigger-integration-workflow:
+          filters:
+            branches:
+              only: master
+          name: trigger-integration-master
+          requires:
+            - orb-tools/publish-dev
+          ssh-fingerprints: 8e:20:46:a7:a4:1b:30:38:50:f9:fc:97:a0:8e:0b:66
+          tag: master
+  integration-tests_prod-release:
+    jobs:
+      - integration-tests:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /integration-.*/
+          name: integration-tests-dev
+      - integration-tests:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-.*/
+          name: integration-tests-master
+      - orb-tools/dev-promote-prod:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-patch.*/
+          name: dev-promote-patch
+          orb-name: dallaso/home-assistant-config
+          requires:
+            - integration-tests-master
+      - orb-tools/dev-promote-prod:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-minor.*/
+          name: dev-promote-minor
+          orb-name: dallaso/home-assistant-config
+          release: minor
+          requires:
+            - integration-tests-master
+      - orb-tools/dev-promote-prod:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /master-major.*/
+          name: dev-promote-major
+          orb-name: dallaso/home-assistant-config
+          release: major
+          requires:
+            - integration-tests-master
