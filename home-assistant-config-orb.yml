@@ -4,9 +4,9 @@
 version: 2.1
 
 description: |
-  SAn orb used to ensure your Home Assistant configuration is compatible with new releases https://www.home-assistant.io/
+  An orb used to ensure your Home Assistant configuration is compatible with new releases https://www.home-assistant.io/
   This orb's source is available here:
-  https://github.com/CircleCI-Public/shellcheck-orb
+  https://github.com/DallasO/home-assistant-config-orb
 
 executors:
   hass:
