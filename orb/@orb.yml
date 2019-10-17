@@ -1,0 +1,9 @@
+# This code is licensed from DallasO to the user under the MIT license.
+# See LICENSE for details.
+# https://github.com/DallasO/home-assistant-config-orb
+version: 2.1
+
+description: |
+  An orb used to ensure your Home Assistant configuration is compatible with new releases https://www.home-assistant.io/
+  This orb's source is available here:
+  https://github.com/DallasO/home-assistant-config-orb
