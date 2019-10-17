@@ -24,8 +24,6 @@ workflows:
       - hass/check-config
 ```
 
-**[See more examples and information in the Orb Registry](https://circleci.com/orbs/registry/orb/dallaso/home-assistant-config)**
-
 ## Contributing
 
 We welcome [issues](https://github.com/DallasO/home-assistant-config-orb/issues) to and [pull requests](https://github.com/DallasO/home-assistant-config-orb/pulls) against this repository!
