@@ -32,20 +32,6 @@ workflows:
           tag: master
   integration-tests_prod-release:
     jobs:
-      - integration-tests:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /integration-.*/
-          name: integration-tests-dev
-      - integration-tests:
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /master-.*/
-          name: integration-tests-master
       - orb-tools/dev-promote-prod:
           filters:
             branches:
@@ -54,8 +40,6 @@ workflows:
               only: /master-patch.*/
           name: dev-promote-patch
           orb-name: dallaso/home-assistant-config
-          requires:
-            - integration-tests-master
       - orb-tools/dev-promote-prod:
           filters:
             branches:
@@ -65,8 +49,6 @@ workflows:
           name: dev-promote-minor
           orb-name: dallaso/home-assistant-config
           release: minor
-          requires:
-            - integration-tests-master
       - orb-tools/dev-promote-prod:
           filters:
             branches:
@@ -76,5 +58,3 @@ workflows:
           name: dev-promote-major
           orb-name: dallaso/home-assistant-config
           release: major
-          requires:
-            - integration-tests-master
