@@ -6,7 +6,6 @@ workflows:
     jobs:
       - orb-tools/lint
       - orb-tools/pack:
-          source-dir: orb
           requires:
             - orb-tools/lint
       - orb-tools/publish-dev:
