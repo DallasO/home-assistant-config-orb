@@ -3,16 +3,13 @@ orbs:
   orb-tools: circleci/orb-tools@8.27
   your-orb: dallaso/home-assistant-config@dev:alpha
 workflows:
-  lint_pack-validate_publish-dev:
+  lint-validate_publish-dev:
     jobs:
       - orb-tools/lint
-      - orb-tools/pack:
-          requires:
-            - orb-tools/lint
       - orb-tools/publish-dev:
           orb-name: dallaso/home-assistant-config
           requires:
-            - orb-tools/pack
+            - orb-tools/lint
       - orb-tools/trigger-integration-workflow:
           filters:
             branches:
