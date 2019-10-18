@@ -1,13 +1,12 @@
 version: 2.1
 orbs:
   orb-tools: circleci/orb-tools@8.27
-  your-orb: dallaso/home-assistant-config@dev:alpha
 workflows:
   lint_pack-validate_publish-dev:
     jobs:
       - orb-tools/lint
       - orb-tools/pack:
-          source-dir: ./
+          source-dir: orb
           requires:
             - orb-tools/lint
       - orb-tools/publish-dev:

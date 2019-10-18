@@ -1,0 +1,13 @@
+# This code is licensed from DallasO to the user under the MIT license.
+# See LICENSE for details.
+# https://github.com/DallasO/home-assistant-config-orb
+description: "A command to check the config file"
+    steps:
+      - checkout
+      - run:
+          name: Check Config
+          command: |
+            mv secrets.example.yaml secrets.yaml
+            cd /usr/src/homeassistant
+            python -m homeassistant -c ~/project/ \
+            --script check_config
