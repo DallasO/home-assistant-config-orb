@@ -3,6 +3,6 @@
 # https://github.com/DallasO/home-assistant-config-orb
 description: |
       Use home-assistant to check your config.
-    executor: hass
-    steps:
-      - script-check-config
+executor: home-assistant
+steps:
+  - script-check-config
