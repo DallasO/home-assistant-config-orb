@@ -27,7 +27,7 @@ commands:
     description: "A command to check the config file"
     steps:
       - checkout
-      - run: 
+      - run:
           name: Check Config
           command: |
             mv secrets.example.yaml secrets.yaml
@@ -73,6 +73,6 @@ examples:
         hass-config:
           jobs:
             - hass-config/check-config:
-                executor: 
+                executor:
                   name: hass
                   tag: beta
