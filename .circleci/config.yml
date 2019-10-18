@@ -8,7 +8,7 @@ workflows:
       - orb-tools/lint
       - orb-tools/publish-dev:
           orb-name: dallaso/home-assistant-config
-          orb-path: ./orb.yml
+          orb-path: project/orb.yml
           requires:
             - orb-tools/lint
       - orb-tools/trigger-integration-workflow:
