@@ -1,0 +1,14 @@
+# This code is licensed from DallasO to the user under the MIT license.
+# See LICENSE for details.
+# https://github.com/DallasO/home-assistant-config-orb
+description: |
+      This is a docker image that contains the specified home-assistant release
+parameters:
+  tag:
+    description: |
+      This is the release you would like to test your configuration with
+    type: enum
+    default: stable
+    enum: ["stable", "latest", "beta", "rc", "dev"]
+docker:
+  - image: homeassistant/home-assistant:<< parameters.tag >>
