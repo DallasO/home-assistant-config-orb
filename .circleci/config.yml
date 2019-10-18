@@ -30,7 +30,6 @@ workflows:
             - orb-tools/publish-dev
           ssh-fingerprints: 8e:20:46:a7:a4:1b:30:38:50:f9:fc:97:a0:8e:0b:66
           tag: master
-          static-release-type: minor
   integration-tests_prod-release:
     jobs:
       - orb-tools/dev-promote-prod:
